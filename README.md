@@ -41,7 +41,8 @@ follows these principles for ensuring best practices for having a safe and cross
 - Does not contain multiple Unicode whitespaces within the filename
 - Does not contain [reserved filenames in Windows](http://msdn.microsoft.com/en-us/library/windows/desktop/aa365247%28v=vs.85%29.aspx)
 - Does not contain following characters (according to [wikipedia](http://en.wikipedia.org/wiki/Filename)): `/ \ ? * : | " < >`
-- Does not end in a full stop `'.'` or comma `','` (in singer, final rune is replaced with '\_' if it matches either of these)
+
+- Folder names cannot end in a full stop `.` or comma `,` (`singer.Folder()` changes the final rune to `_` if it matches either of these)
 
 ## Credits
 
