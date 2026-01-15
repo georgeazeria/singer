@@ -12,6 +12,9 @@ $ go get github.com/georgeazeria/singer
 
 singer ensures any string can be used as a file or folder (directory) name on any platform by normalising white space characters, filtering out illegal characters, and truncating the input to 255 characters
 
+use `singer.File` to santise inputs if they'll only ever be used as a file name;
+for folders `singer.Folder`, the only difference is string ending `.` or `,` becomes `_`.
+
 ```go
 package main
 
@@ -21,40 +24,17 @@ import (
 )
 
 func main() {
-	name := singer.Sanitise("  what\\ēver//wëird:user:înput:")
-	fmt.Println(name) // => "whatēverwëirduserînput"
-}
-```
+	fileName := singer.File("Feel Good Inc.")+".flac"
+	fmt.Println(fileName) // => "Feel Good Inc..flac"
 
-you can add extra room for filename by using `SanitiseLength`:
-
-```go
-// import "strings"
-
-name := strings.Repeat("A", 400)
-
-singer.Sanitise(name)
-// => resulting filename is 255 characters long
-
-singer.SanitiseLength(name, 100)
-// => resulting filename is 155 characters long
-```
-
-and yes, the American spelling also works:
-
-```go
-
-func main() {
-	name := singer.Sanitize("  what\\ēver//wëird:user:înput:")
-	username := singer.SanitizeLength("  what\\ēver//wëird:user:înput:", 100)
-	fmt.Println(name) // => "whatēverwëirduserînput"
-	fmt.Println(username) // => "whatēverwëirduserînput"
+    folderName := singer.Folder("Convenient, Trash. - Convenient, Trash.")
+	fmt.Println(folderName) // => "Convenient, Trash. - Convenient, Trash_"
 }
 ```
 
 ## Valid file and folder names
 
-follows these principles for ensuring best practices for having a safe and cross-platform filenames are:
+follows these principles for ensuring best practices for having a safe and cross-platform file and folder names:
 
 - Does not contain [ASCII control characters](http://en.wikipedia.org/wiki/ASCII#ASCII_control_characters) (hexadecimal `00` to `1f`)
 - Does not contain [Unicode whitespace](http://en.wikipedia.org/wiki/Whitespace_character#Unicode) at the beginning and the end of filename
