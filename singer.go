@@ -1,7 +1,6 @@
 package singer
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 	"math/rand"
@@ -35,20 +34,20 @@ func randomLetters(length int) string {
 
 
 func Sanitise(input string) string {
-	return sanitise(input, 0, "")
+	return sanitise(input, 0)
 }
 
 func Sanitize(input string) string { // American Engish compatability layer
-	return sanitise(input, 0, "")
+	return sanitise(input, 0)
 }
 
 
 func SanitiseLength(input string, pad int) string {
-	return sanitise(input, pad, "")
+	return sanitise(input, pad)
 }
 
 func SanitizeLength(input string, pad int) string { // American Engish compatability layer
-	return sanitise(input, pad, "")
+	return sanitise(input, pad)
 }
 
 
