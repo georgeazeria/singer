@@ -45,4 +45,5 @@ follows these principles for ensuring best practices for having a safe and cross
 
 ## Credits
 
-singer is a fork of [gozaru](https://subosito/gozaru) by [@subosito](https://subosito); itself a Go port of [zaru](https://github.com/madrobby/zaru) by [@madrobby](https://github.com/madrobby). Appreciate you both.
+singer is a fork of [gozaru](https://subosito/gozaru) by [@subosito](https://subosito); itself a go port of [zaru](https://github.com/madrobby/zaru) by [@madrobby](https://github.com/madrobby).
+appreciate you both.
