@@ -33,26 +33,24 @@ func randomLetters(length int) string {
 }
 
 
-func Sanitise(input string) string {
-	return sanitise(input, 0)
+func File(input string) string {
+	return sanitise(input, 0, false)
 }
 
-func Sanitize(input string) string { // American Engish compatability layer
-	return sanitise(input, 0)
+func Folder(input string) string {
+	return sanitise(input, 0, true) 
 }
 
+// func FileCap(input string, cap int) string {
+// 	return sanitise(input, cap, false)
+// }
 
-func SanitiseLength(input string, pad int) string {
-	return sanitise(input, pad)
-}
+// func FolderCap(input string, cap int) string {
+// 	return sanitise(input, cap, false)
+// }
 
-func SanitizeLength(input string, pad int) string { // American Engish compatability layer
-	return sanitise(input, pad)
-}
-
-
-func sanitise(input string, pad int) string {
-	input = clean(input)
+func sanitise(input string, pad int, isFolder bool) string {
+	input = clean(input, isFolder)
 	length := len(input)
 
 	if pad > length {
@@ -75,18 +73,20 @@ func replace(input string, pattern string, replacement string) string {
 	return strings.TrimSpace(output.ReplaceAllString(input, replacement))
 }
 
-func clean(input string) string {
+func clean(input string, isFolder bool) string {
 	input = replace(input, UnicodeWhitespace, " ")
 	input = replace(input, CharacterFilter, "")
 	input = replace(input, UnicodeWhitespace, " ")
 
-	return filter(input)
+	return filter(input, isFolder)
 }
 
-func filter(input string) string {
+func filter(input string, isFolder bool) string {
 	input = filterWindowsReservedNames(input)
 	input = filterBlank(input)
-	input = replaceIllegalFinalRune(input)
+	if isFolder == true {
+		input = replaceIllegalFinalRune(input)
+	}
 
 	return input
 }
